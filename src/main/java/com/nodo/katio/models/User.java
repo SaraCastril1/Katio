@@ -16,7 +16,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
-    private long Id;
+    private long id;
 
     private String name;
     private String lastname;
@@ -26,43 +26,41 @@ public class User {
     private String passhash;
 
     public long getId() {
-        return Id;
+        return this.id;
     }
-    public void setId(long id) {
-        Id = id;
-    }
+
     public String getName() {
-        return name;
+        return this.name;
     }
     public void setName(String name) {
         this.name = name;
     }
     public String getLastname() {
-        return lastname;
+        return this.lastname;
     }
     public void setLastname(String lastname) {
         this.lastname = lastname;
     }
     public String getEmail() {
-        return email;
+        return this.email;
     }
     public void setEmail(String email) {
         this.email = email;
     }
     public String getPhone() {
-        return phone;
+        return this.phone;
     }
     public void setPhone(String phone) {
         this.phone = phone;
     }
     public String getIdentification() {
-        return identification;
+        return this.identification;
     }
     public void setIdentification(String identification) {
         this.identification = identification;
     }
     public String getPasshash() {
-        return passhash;
+        return this.passhash;
     }
     public void setPasshash(String passhash) {
         this.passhash = passhash;

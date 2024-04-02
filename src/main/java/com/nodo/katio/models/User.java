@@ -1,7 +1,5 @@
 package com.nodo.katio.models;
 
-import java.lang.String;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,5 +24,48 @@ public class User {
     private String phone;
     private String identification;    
     private String passhash;
+
+    public long getId() {
+        return Id;
+    }
+    public void setId(long id) {
+        Id = id;
+    }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getLastname() {
+        return lastname;
+    }
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public String getPhone() {
+        return phone;
+    }
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+    public String getIdentification() {
+        return identification;
+    }
+    public void setIdentification(String identification) {
+        this.identification = identification;
+    }
+    public String getPasshash() {
+        return passhash;
+    }
+    public void setPasshash(String passhash) {
+        this.passhash = passhash;
+    }
     
 }

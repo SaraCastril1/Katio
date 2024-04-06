@@ -7,25 +7,25 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 import com.nodo.katio.repositories.UserRepository;
-// import com.nodo.katio.interfaces.BaseUserService;
+import com.nodo.katio.interfaces.BaseUserService;
 import com.nodo.katio.models.User;
 
 @Service
-public class UserService{
+public class UserService implements BaseUserService{
     
     private UserRepository userRepository;
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-
+    @Override
     public Iterable<User> getAllUsers() {
         return userRepository.findAll();
     }
-
+    @Override
     public User addUser(User user) {
         try{
             if(user.getPasshash().length() > 15)

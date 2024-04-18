@@ -33,13 +33,14 @@ public class UserService implements BaseUserService{
                 user.setPasshash(blake3Formatter(user.getPasshash()));
                 user = userRepository.saveAndFlush(user);
             }
+            
         }
         catch(Exception ex){
             ex.printStackTrace();
         }       
         return user;
     }
-
+    //Encriptación en una sola dirección
     private String blake3Formatter(String value)  throws NoSuchAlgorithmException
     {
         final MessageDigest md = MessageDigest.getInstance("SHA3-512");

@@ -16,7 +16,7 @@ import com.nodo.katio.repositories.UserRepository;
 
 
 @RestController
-@RequestMapping("/katio/users")
+@RequestMapping("/users")
 public class UserController {
 
     @Autowired
@@ -31,8 +31,6 @@ public class UserController {
 
     @PutMapping("/add")
     public ResponseEntity<User> addUser(@RequestBody User user) {
-        System.out.println("Mi nombre es: "+user.getName());
-        System.out.println("Mi contraseña es: "+user.getPasshash());
         User createdUser = new UserService(userRepository).addUser(user);
         
         return createdUser.getId() == 0 ? 

@@ -26,18 +26,20 @@ public class UserService implements BaseUserService{
         return userRepository.findAll();
     }
     @Override
-    public User addUser(User user) {
+    public User addUser(User user) {                                                                
         try{
-            if(user.getPasshash().length() > 15)
-            {
-                user.setPasshash(blake3Formatter(user.getPasshash()));
-                user = userRepository.saveAndFlush(user);
-            }
+            // if(user.getPasshash().length() > 15)
+            // {
+            //     user.setPasshash(blake3Formatter(user.getPasshash()));
+            //     user = userRepository.saveAndFlush(user);
+            // }
+            user.setPasshash(blake3Formatter(user.getPasshash()));
+            user = userRepository.saveAndFlush(user);
             
         }
         catch(Exception ex){
             ex.printStackTrace();
-        }       
+        }    
         return user;
     }
     //Encriptación en una sola dirección

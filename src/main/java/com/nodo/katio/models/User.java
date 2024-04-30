@@ -12,13 +12,12 @@ import jakarta.persistence.Table;
 
 
 @Entity
-@Table(name="Users")
+@Table(name="users")
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)s
+    private Integer id;
 
     private String name;
     private String lastname;
@@ -27,20 +26,33 @@ public class User {
     private String identification;    
     private String passhash;
 
-    public long getId() {
-        return this.id;
+    public void stringValidator(String expression) {
+        if (!expression.matches("[a-zA-ZÁÉÍÓÚáéíóúÜüÑñ ]+")) {
+            throw new IllegalArgumentException("Expression must contain only alphabets and spaces");
+        }
     }
 
+    public void integerValidator(String expression) {
+        if (!expression.matches("[0-9]+")) {
+            throw new IllegalArgumentException("Expression must contain only numbers");
+        }
+    }
+
+    public Integer getId() {
+        return this.id;
+    }
     public String getName() {
         return this.name;
     }
     public void setName(String name) {
+        this.stringValidator(name);
         this.name = name;
     }
     public String getLastname() {
         return this.lastname;
     }
     public void setLastname(String lastname) {
+        this.stringValidator(lastname);
         this.lastname = lastname;
     }
     public String getEmail() {
@@ -61,12 +73,14 @@ public class User {
         return this.phone;
     }
     public void setPhone(String phone) {
+        this.integerValidator(phone);
         this.phone = phone;
     }
     public String getIdentification() {
         return this.identification;
     }
     public void setIdentification(String identification) {
+        // integerValidator(identification);
         this.identification = identification;
     }
     public String getPasshash() {

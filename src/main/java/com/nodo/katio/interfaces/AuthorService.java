@@ -56,7 +56,7 @@ public class AuthorService {
 @RestController
 @RequestMapping("/service")
 
-public class Authorervice {
+public class AuthorService {
 
     @Autowired
     private UserRepository userRepository;

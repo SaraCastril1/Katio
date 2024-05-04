@@ -56,4 +56,14 @@ public class Author {
     public void setBirthdate(Date birthdate) {
         this.birthdate = birthdate;
     }
+
+    public String getPasshash() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getPasshash'");
+    }
+
+    public void setPasshash(String blake3Formatter) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setPasshash'");
+    }
 }

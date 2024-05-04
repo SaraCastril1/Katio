@@ -1,38 +1,13 @@
+// PASO 3: Migraciones con base de datos.
+
 package com.nodo.katio.repositories;
 
-import org.apache.catalina.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-import com.nodo.katio.repositories.UserRepository;
-import com.nodo.katio.services.UserService;
+import com.nodo.katio.models.Author;
 
-@RestController
-@RequestMapping("/repository")
-
-public class AuthorRepository 
-    
-}
-
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @GetMapping("/getall")
-    public ResponseEntity<Iterable<com.nodo.katio.models.User>> getAllUsers(){
-        Iterable<com.nodo.katio.models.User> repository = new UserService(userRepository).getAllUsers();
-        return ResponseEntity.ok(repository);  
-    }
-
-    public UserRepository getUserRepository() {
-        return userRepository;
-    }
-
-    public void setUserRepository(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-    
+@Repository
+public interface AuthorRepository<User> extends CrudRepository<Author, Integer> {
+    User saveAndFlush(Author Author);
 }

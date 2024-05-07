@@ -7,10 +7,12 @@ import com.nodo.katio.models.Author;
 
 public class AuthorService implements BaseAuthorService {
 
-    private AuthorRepository AuthorRepository;
+    @SuppressWarnings("unused")
+    private AuthorService AuthorService;
 
-    public AuthorService(AuthorRepository userRepository) {
-        this.AuthorRepository = AuthorRepository;
+    @SuppressWarnings("rawtypes")
+    public AuthorService(AuthorRepository userRepository, AuthorService Authors) {
+        this.AuthorService = Authors;
     }
     /*
      * @Override
@@ -64,7 +66,12 @@ public class AuthorService implements BaseAuthorService {
 
     @Override
     public Iterable<Author> getAllUsers() {
-        return AuthorRepository.findAll();
+        return AuthorService.findAll();
+    }
+
+    private Iterable<Author> findAll() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'findAll'");
     }
 
     @Override

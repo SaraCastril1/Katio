@@ -7,8 +7,15 @@ import com.nodo.katio.models.Author;
 
 public class AuthorService implements BaseAuthorService {
 
-    @SuppressWarnings("unused")
     private AuthorService AuthorService;
+
+    public AuthorService getAuthorService() {
+        return AuthorService;
+    }
+
+    public void setAuthorService(AuthorService authorService) {
+        AuthorService = authorService;
+    }
 
     @SuppressWarnings("rawtypes")
     public AuthorService(AuthorRepository userRepository, AuthorService Authors) {

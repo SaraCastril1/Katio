@@ -16,3 +16,30 @@ CREATE TABLE users
     passhash NVARCHAR(255) NOT NULL,
     INDEX email_idx(Email)
 );
+
+CREATE TABLE Authors
+(
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name NVARCHAR(255) NOT NULL,
+    lastname NVARCHAR(255) NOT NULL,
+    country NVARCHAR(255) NOT NULL,
+    birthdate DATE NOT NULL,
+    INDEX apellido_ix(lastname)
+);
+
+CREATE TABLE Books
+(
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name NVARCHAR(255) NOT NULL,
+    ISBN10 NVARCHAR(255) NOT NULL,
+    ISBN13 NVARCHAR(255) NOT NULL,
+    Published DATE NOT NULL,
+    Edition NVARCHAR(255) NOT NULL.
+    Gener NVARCHAR(255) NOT NULL,
+    Dewey_Index INT UNSIGNED NOT NULL,
+    Author_Id INT UNSIGNED NOT NULL,
+    CONSTRAINT 'fk_book_author'
+     FOREIGN KEY (Author_Id) REFERENCES Authors (id)
+     ON DELETE CASCADE
+     ON UPTDATE RESTRICT
+);

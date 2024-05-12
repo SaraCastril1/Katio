@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nodo.katio.repositories.UserRepository;
+import com.nodo.katio.repository.UserRepository;
 import com.nodo.katio.services.UserService;
 
 @RestController

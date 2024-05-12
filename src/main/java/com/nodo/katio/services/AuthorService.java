@@ -1,9 +1,9 @@
 
 package com.nodo.katio.services;
 
-import com.nodo.katio.repositories.AuthorRepository;
 import com.nodo.katio.interfaces.BaseAuthorService;
 import com.nodo.katio.models.Author;
+import com.nodo.katio.repository.AuthorRepository;
 
 public class AuthorService implements BaseAuthorService {
 

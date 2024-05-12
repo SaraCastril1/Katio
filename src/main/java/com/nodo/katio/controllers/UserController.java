@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nodo.katio.services.UserService;
 import com.nodo.katio.models.User;
-import com.nodo.katio.repositories.UserRepository;
+import com.nodo.katio.repository.UserRepository;
 
 @RestController
 @RequestMapping("/users")

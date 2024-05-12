@@ -1,6 +1,6 @@
 // PASO 3: Migraciones con base de datos.
 
-package com.nodo.katio.repositories;
+package com.nodo.katio.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.nodo.katio.models.User;
 
 @Repository
-public interface UserRepository extends CrudRepository<User, Integer>{
+public interface UserRepository extends CrudRepository<User, Integer> {
     User saveAndFlush(User user);
 }

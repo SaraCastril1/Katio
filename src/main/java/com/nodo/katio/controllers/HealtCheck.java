@@ -15,9 +15,8 @@ import com.nodo.katio.services.BookService;
 @RequestMapping("/katio/health")
 public class HealtCheck<BookRepository> {
 
-    @SuppressWarnings("unused")
     @Autowired
-    private com.nodo.katio.repositories.BookRepository _BookRepository;
+    private com.nodo.katio.repository.BookRepository _BookRepository;
 
     @GetMapping("/check")
     public ResponseEntity<String> healtCheck() {

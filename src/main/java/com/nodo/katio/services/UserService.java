@@ -7,57 +7,58 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-
 import org.springframework.stereotype.Service;
-import com.nodo.katio.repositories.UserRepository;
+
 import com.nodo.katio.interfaces.BaseUserService;
 import com.nodo.katio.models.User;
+import com.nodo.katio.repository.UserRepository;
 
 @Service
-public class UserService implements BaseUserService{
-    
+public class UserService implements BaseUserService {
+
     private UserRepository userRepository;
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+
     @Override
     public Iterable<User> getAllUsers() {
         return userRepository.findAll();
     }
+
     @Override
-    public User addUser(User user) {                                                                
-        try{
+    public User addUser(User user) {
+        try {
             // if(user.getPasshash().length() > 15)
             // {
-            //     user.setPasshash(blake3Formatter(user.getPasshash()));
-            //     user = userRepository.saveAndFlush(user);
+            // user.setPasshash(blake3Formatter(user.getPasshash()));
+            // user = userRepository.saveAndFlush(user);
             // }
             user.setPasshash(blake3Formatter(user.getPasshash()));
             user = userRepository.saveAndFlush(user);
-            
-        }
-        catch(Exception ex){
+
+        } catch (Exception ex) {
             ex.printStackTrace();
-        }    
+        }
         return user;
     }
-    //Encriptación en una sola dirección
-    private String blake3Formatter(String value)  throws NoSuchAlgorithmException
-    {
+
+    // Encriptación en una sola dirección
+    private String blake3Formatter(String value) throws NoSuchAlgorithmException {
         final MessageDigest md = MessageDigest.getInstance("SHA3-512");
         byte[] hash = md.digest(value.getBytes(StandardCharsets.UTF_8));
         String sha3Hex = bytesToHex(hash);
         return sha3Hex;
     }
 
-    private String bytesToHex(byte[] hash){
+    private String bytesToHex(byte[] hash) {
         BigInteger number = new BigInteger(1, hash);
         StringBuilder hexString = new StringBuilder(number.toString(16));
-        while(hexString.length() < 64){
+        while (hexString.length() < 64) {
             hexString.insert(0, '0');
         }
         return hexString.toString();
     }
-    
+
 }

@@ -18,11 +18,12 @@ public class HealtCheck<BookRepository> {
     @Autowired
     private com.nodo.katio.repository.BookRepository _BookRepository;
 
+    @SuppressWarnings("rawtypes")
     @GetMapping("/check")
     public ResponseEntity<String> healtCheck() {
         String result = "";
         try {
-            new BookService(_BookRepository).getallBooks();
+            new BookService(_BookRepository).getAllBooks();
             result = "Healt Check: Passed \nDatabase Connection: Passed";
         } catch (Exception ex) {
             if (ex.getCause() instanceof ConnectException) {

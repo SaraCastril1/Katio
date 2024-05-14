@@ -6,10 +6,13 @@ import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
-
+import java.util.ArrayList;
+import java.util.Optional;
 import org.springframework.stereotype.Service;
 import com.nodo.katio.repositories.UserRepository;
+
+
+
 import com.nodo.katio.interfaces.BaseUserService;
 import com.nodo.katio.models.User;
 
@@ -42,6 +45,18 @@ public class UserService implements BaseUserService{
         }    
         return user;
     }
+
+    @Override
+    public Optional<User> getUserById(Integer id) {
+        return userRepository.findById(id);
+    }
+
+    @Override
+    public Optional<User> getUserByName(String name) {
+        return userRepository.findByName(name);
+    }
+
+
     //Encriptación en una sola dirección
     private String blake3Formatter(String value)  throws NoSuchAlgorithmException
     {
@@ -59,5 +74,7 @@ public class UserService implements BaseUserService{
         }
         return hexString.toString();
     }
+    
+    
     
 }

@@ -3,19 +3,27 @@
 package com.nodo.katio.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nodo.katio.services.UserService;
+
+import java.util.List;
+import java.util.Optional;
+
 import com.nodo.katio.models.User;
 import com.nodo.katio.repositories.UserRepository;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/users")
 public class UserController {
 
@@ -36,22 +44,36 @@ public class UserController {
                 ResponseEntity.ok(createdUser);
     }
 
-    // @PutMapping("/update/{id}")
-    // public ResponseEntity<User> updateUser(@PathVariable Integer id, @RequestBody User updatedUser) {
-    //     User existingUser = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
+    @GetMapping ("/get_by_id/{id}")
+    public Optional<User> getUserById(@PathVariable("id") Integer id){
+        return new UserService(userRepository).getUserById(id);
+   }
 
-    //     existingUser.setName(updatedUser.getName());
-    //     existingUser.setEmail(updatedUser.getEmail());
-    //     existingUser.setLastname(updatedUser.getLastname());
-    //     existingUser.setPhone(updatedUser.getPhone());
-    //     existingUser.setIdentification(updatedUser.getIdentification());
-    //     existingUser.setPasshash(updatedUser.getPasshash()); 
-
-
-    //     existingUser = userRepository.save(existingUser); // Save updated user
-
-    //     return ResponseEntity.ok(existingUser);
+    // @GetMapping("/get_by_name/{name}")
+    // public ResponseEntity<Optional<User>> getUserByName(@PathVariable("name") String name) {
+    //     Optional<User> users = userRepository.findByName(name);
+        
+    //     if (users.isPresent()) {
+    //         return new ResponseEntity<>(users, HttpStatus.OK);
+    //     } else {
+    //         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    //     }
     // }
+
+    // @GetMapping("/get_by_name/{name}")
+    // public ResponseEntity<List<User>> getUsersByName(@PathVariable("name") String name) {
+    //     var users = userRepository.findByName(name);
+        
+    //     if (!users.isEmpty()) {
+    //         return new ResponseEntity<>(users, HttpStatus.OK);
+    //     } else {
+    //         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    //     }
+    // }
+
+    //FUZZY SEARCH -> String match más cercano
+
+
 
 
 } 

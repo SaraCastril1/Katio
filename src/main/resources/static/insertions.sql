@@ -43,8 +43,8 @@ INSERT INTO Authors (Name, Lastname, Country, Birthdate)
 INSERT INTO Books VALUES 
     (0, 'Cien años de soledad', '8420471836', '978-8420471839', '1967-06-05', 'RAE Obra Académica', 'Realismo Mágico', '800', 1),
     (0, 'Huellas', '9584277278', '978-958427275', '2019-01-01', '1ra edicion', 'Crónica', '800', 3),
-    (0, 'María', '14802722922', '978-148027292', '1867-01-01', '1ra edicion', 'Romancticismo', '800', 2);
-    (0, 'Mexico Gothic', '8420471836', '978-05256620785', '2020-06-30', 'Del Rey', 'Horror Gótico', '800', 4);
+    (0, 'María', '14802722922', '978-148027292', '1867-01-01', '1ra edicion', 'Romancticismo', '800', 2),
+    (0, 'Mexico Gothic', '8420471836', '978-05256620785', '2020-06-30', 'Del Rey', 'Horror Gótico', '800', 4),
     (0, 'Sin remedio', '3161484100', '978-3161484100', '1984-01-01', 'Alfaguara', 'Ficción', '800', 12),    
     (0, 'Delirio', '9587041453', '9789587041453', '2004-01-01', 'Alfaguara', 'Ficcion', '800', 9),    
     (0, 'Infinito en un junco', '8417860790', '9788417860790', '2019-01-01', 'Siruela', '800', '800', 5),    

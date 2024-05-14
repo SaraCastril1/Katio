@@ -1,4 +1,4 @@
-// PASO 1: Agente de trancito que recibe las conexiones
+// PASO 1: Agente de trancito que recibe las conexione
 
 package com.nodo.katio.controllers;
 

@@ -1,10 +1,13 @@
 package com.nodo.katio.interfaces;
 
-import java.util.Optional;
 
 import com.nodo.katio.models.Author;
 
 public interface BaseAuthorService {
     Iterable<Author> getAllAuthors();
-     Optional<Author> getAuthorById(Long id);
+    Author getAuthorById(long id);
+    Iterable<Author> getAuthorsByName(String name);
+    Iterable<Author> getAuthorsByLastname(String lastname);
+    Iterable<Author> getAuthorsByCountry(String country);
+
 }

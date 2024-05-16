@@ -7,20 +7,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nodo.katio.models.Book;
-import com.nodo.katio.models.User;
 import com.nodo.katio.repositories.BookRepository;
 import com.nodo.katio.services.BookService;
-import com.nodo.katio.services.UserService;
+
 
 
 @RestController
-@RequestMapping("/books")
+@RequestMapping("/katio/books")
 @CrossOrigin(origins = "*")
 public class BookController {
     
@@ -44,13 +42,24 @@ public class BookController {
         }
     }
 
-
-
-
     @GetMapping("/getByName")
     public ResponseEntity<Iterable<Book>> getBookByName(@RequestBody Book book) {
         var response = new BookService(bookRepository).getBooksByName(book.getName());
         return new ResponseEntity<Iterable<Book>>(response, HttpStatus.OK);
     }
+
+    @GetMapping("/getByGenre")
+    public ResponseEntity<Iterable<Book>> getBookByGenre(@RequestBody Book book) {
+        var response = new BookService(bookRepository).getBooksByGenre(book.getGenre());
+        return new ResponseEntity<Iterable<Book>>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/getByEdition")
+    public ResponseEntity<Iterable<Book>> getBookByEdition(@RequestBody Book book) {
+        var response = new BookService(bookRepository).getBooksByEdition(book.getEdition());
+        return new ResponseEntity<Iterable<Book>>(response, HttpStatus.OK);
+    }
+
+
 
 }

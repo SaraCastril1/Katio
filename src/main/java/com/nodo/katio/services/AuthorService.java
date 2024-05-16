@@ -1,13 +1,8 @@
 package com.nodo.katio.services;
-
-import java.util.Optional;
-
-import org.apache.catalina.startup.ClassLoaderFactory.Repository;
 import org.springframework.stereotype.Service;
 
 import com.nodo.katio.interfaces.BaseAuthorService;
 import com.nodo.katio.models.Author;
-import com.nodo.katio.models.User;
 import com.nodo.katio.repositories.AuthorRepository;
 
 @Service
@@ -26,11 +21,25 @@ public class AuthorService implements BaseAuthorService {
     }
 
 
-
     @Override
-    public Optional<Author> getAuthorById(Long id) {
+    public Author getAuthorById(long id) {
         return authorRepository.findById(id);
     }
 
+
+    @Override
+    public Iterable<Author> getAuthorsByName(String name) {
+        return authorRepository.findByName(name);
+    }
+
+    @Override
+    public Iterable<Author> getAuthorsByLastname(String lastname) {
+        return authorRepository.findByLastname(lastname);
+    }
+
+    @Override
+    public Iterable<Author> getAuthorsByCountry(String country) {
+        return authorRepository.findByCountry(country);
+    }
     
 }

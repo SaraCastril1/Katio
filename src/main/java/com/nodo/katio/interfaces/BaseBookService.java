@@ -7,4 +7,6 @@ public interface BaseBookService {
     Iterable<Book> getAllBooks();
     Book getBookById(long id);
     Iterable<Book> getBooksByName(String name);
+    Iterable<Book> getBooksByGenre(String genre);
+    Iterable<Book> getBooksByEdition(String edition);
 }

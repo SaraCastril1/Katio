@@ -2,6 +2,8 @@
 
 package com.nodo.katio.controllers;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,20 +13,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nodo.katio.services.UserService;
-
-import java.util.List;
-import java.util.Optional;
-
 import com.nodo.katio.models.User;
 import com.nodo.katio.repositories.UserRepository;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/users")
+@RequestMapping("/katio/users")
 public class UserController {
 
     @Autowired
@@ -44,10 +41,22 @@ public class UserController {
                 ResponseEntity.ok(createdUser);
     }
 
-    @GetMapping ("/get_by_id/{id}")
-    public Optional<User> getUserById(@PathVariable("id") Integer id){
-        return new UserService(userRepository).getUserById(id);
-   }
+    @GetMapping("/getById")
+    public ResponseEntity<User> getUserById(@RequestBody User user) {
+        Optional<User> response = Optional.ofNullable(new UserService(userRepository).getUserById(user.getId()));
+        
+        if (response.isPresent()) {
+            return new ResponseEntity<>(response.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/getByName")
+    public ResponseEntity<Iterable<User>> getBookByName(@RequestBody User user) {
+        var response = new UserService(userRepository).getUsersByName(user.getName());
+        return new ResponseEntity<Iterable<User>>(response, HttpStatus.OK);
+    }
 
    
 } 

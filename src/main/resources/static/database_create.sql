@@ -1,4 +1,4 @@
--- MariaDB
+-- MariaDB.
 CREATE DATABASE katio
 COLLATE = `uca1400_spanish_ai_ci`; 
 -- Accent Insensitive Case Insensitive

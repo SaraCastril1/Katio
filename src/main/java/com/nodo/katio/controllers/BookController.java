@@ -60,6 +60,16 @@ public class BookController {
         return new ResponseEntity<Iterable<Book>>(response, HttpStatus.OK);
     }
 
-
+    // BOOKS BY AUTHORS ----------------------------------------------------------------------
+    @GetMapping("/getByAuthorId")
+    public ResponseEntity<Book> getBookByAuthorId(@RequestBody Book book) {
+        Optional<Book> response = Optional.ofNullable(new BookService(bookRepository).getBookByAuthorId(book.getAuthorId()));
+        
+        if (response.isPresent()) {
+            return new ResponseEntity<>(response.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 
 }

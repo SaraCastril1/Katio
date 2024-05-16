@@ -3,6 +3,7 @@ package com.nodo.katio.services;
 import org.springframework.stereotype.Service;
 
 import com.nodo.katio.interfaces.BaseBookService;
+import com.nodo.katio.models.Author;
 import com.nodo.katio.models.Book;
 import com.nodo.katio.repositories.BookRepository;
 
@@ -39,6 +40,13 @@ public class BookService implements BaseBookService {
     @Override
     public Iterable<Book> getBooksByEdition(String edition) {
         return bookRepository.findByEdition(edition);
+    }
+
+    // BOOKS BY AUTHORS ------------------------------------------------------------------
+
+    @Override
+    public Book getBookByAuthorId(long id) {
+        return bookRepository.findByAuthorId(id);
     }
 
 

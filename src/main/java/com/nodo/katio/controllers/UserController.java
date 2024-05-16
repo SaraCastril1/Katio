@@ -49,31 +49,5 @@ public class UserController {
         return new UserService(userRepository).getUserById(id);
    }
 
-    // @GetMapping("/get_by_name/{name}")
-    // public ResponseEntity<Optional<User>> getUserByName(@PathVariable("name") String name) {
-    //     Optional<User> users = userRepository.findByName(name);
-        
-    //     if (users.isPresent()) {
-    //         return new ResponseEntity<>(users, HttpStatus.OK);
-    //     } else {
-    //         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    //     }
-    // }
-
-    // @GetMapping("/get_by_name/{name}")
-    // public ResponseEntity<List<User>> getUsersByName(@PathVariable("name") String name) {
-    //     var users = userRepository.findByName(name);
-        
-    //     if (!users.isEmpty()) {
-    //         return new ResponseEntity<>(users, HttpStatus.OK);
-    //     } else {
-    //         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    //     }
-    // }
-
-    //FUZZY SEARCH -> String match más cercano
-
-
-
-
+   
 } 

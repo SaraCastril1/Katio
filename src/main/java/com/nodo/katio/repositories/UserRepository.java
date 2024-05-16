@@ -13,6 +13,5 @@ import com.nodo.katio.models.User;
 @Repository
 public interface UserRepository extends CrudRepository<User, Integer>{
     User saveAndFlush(User user);
-    
-    Optional<User> findByName(String name);
+
 }

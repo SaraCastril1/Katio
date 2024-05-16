@@ -7,10 +7,6 @@ import java.util.Optional;
 public interface BaseUserService {
     
     Iterable<User> getAllUsers();
-
     User addUser(User user);
-
-    Optional<User> getUserByName(String name);
-
     Optional<User> getUserById(Integer id);
 }

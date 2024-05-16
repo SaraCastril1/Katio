@@ -6,7 +6,6 @@ import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
 import com.nodo.katio.repositories.UserRepository;
@@ -31,11 +30,11 @@ public class UserService implements BaseUserService{
     @Override
     public User addUser(User user) {                                                                
         try{
-            // if(user.getPasshash().length() > 15)
-            // {
-            //     user.setPasshash(blake3Formatter(user.getPasshash()));
-            //     user = userRepository.saveAndFlush(user);
-            // }
+            if(user.getPasshash().length() > 15)
+            {
+                user.setPasshash(blake3Formatter(user.getPasshash()));
+                user = userRepository.saveAndFlush(user);
+            }
             user.setPasshash(blake3Formatter(user.getPasshash()));
             user = userRepository.saveAndFlush(user);
             
@@ -51,10 +50,7 @@ public class UserService implements BaseUserService{
         return userRepository.findById(id);
     }
 
-    @Override
-    public Optional<User> getUserByName(String name) {
-        return userRepository.findByName(name);
-    }
+    
 
 
     //Encriptación en una sola dirección

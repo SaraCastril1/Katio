@@ -1,12 +1,9 @@
-
-USE Katio3;
-
 INSERT INTO Authors (Name, Lastname, Country, Birthdate)
     VALUES 
     ('Gabriel', 'García Márquez', 'Colombia', '1940-03-03'),
     ('Jorge', 'Isaacs', 'Colombia', '1836-04-01'),
     ('Germán', 'Castro-Caycedo', 'Colombia', '1940-03-03'),
-    ('Silvia', 'Moreno Garcia', 'Mexico', '1981-04-25');
+    ('Silvia', 'Moreno Garcia', 'Mexico', '1981-04-25'),
     ('Irene', 'Vallejo', 'España', '1979=06-06' ),
     ('Sarah', 'Maas', 'EEUU', '1986-03-05' ),
     ('Mario', 'Mendoza', 'Colombia', '1964-01-10' ),

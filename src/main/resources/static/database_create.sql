@@ -1,9 +1,9 @@
 -- MariaDB
-CREATE DATABASE katio3
+CREATE DATABASE katio
 COLLATE = `uca1400_spanish_ai_ci`; 
 -- Accent Insensitive Case Insensitive
 
-Use katio3;
+Use katio;
 
 CREATE TABLE users
 (

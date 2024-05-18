@@ -6,7 +6,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.nodo.katio.models.Book;
-import com.nodo.katio.models.Author;
 
 
 @Repository
@@ -30,8 +29,11 @@ public interface BookRepository extends CrudRepository<Book, Long> {
     // BOOKS BY AUTHORS ---------------------------------------------------------------------
 
     @Query(nativeQuery = true, 
-        value = "SELECT * FROM BOOKS WHERE author_id = :author_id")
-    Book findByAuthorId(@Param("author_id") long author_id);
+        value = "SELECT * FROM BOOKS WHERE author_id LIKE %:author_id%")
+    Iterable<Book> findByAuthorId(@Param("author_id") long author_id);
+
+
+
 }
 
 

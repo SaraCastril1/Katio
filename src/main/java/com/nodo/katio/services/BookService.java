@@ -1,21 +1,27 @@
 package com.nodo.katio.services;
 
+import java.util.ArrayList;
+
 import org.springframework.stereotype.Service;
 
+import com.nodo.katio.dto.BookByAuthor;
 import com.nodo.katio.interfaces.BaseBookService;
-import com.nodo.katio.models.Author;
 import com.nodo.katio.models.Book;
+import com.nodo.katio.repositories.BookByAuthorRepository;
 import com.nodo.katio.repositories.BookRepository;
 
 @Service
 public class BookService implements BaseBookService {
 
     private BookRepository bookRepository;
+    private BookByAuthorRepository bookByAuthorRepository;
 
-    public BookService(BookRepository bookRepository){
+    public BookService(BookRepository bookRepository, BookByAuthorRepository bookByAuthorRepository){
         this.bookRepository = bookRepository;
+        this.bookByAuthorRepository = bookByAuthorRepository;
     }
     
+
     @Override
     public Iterable<Book> getAllBooks() {
         return bookRepository.findAll();
@@ -42,12 +48,21 @@ public class BookService implements BaseBookService {
         return bookRepository.findByEdition(edition);
     }
 
+
     // BOOKS BY AUTHORS ------------------------------------------------------------------
 
     @Override
-    public Book getBookByAuthorId(long id) {
+    public Iterable<Book> getBooksByAuthorId(long id) {
         return bookRepository.findByAuthorId(id);
     }
+
+    @Override
+    public Iterable<BookByAuthor> getBooksByAuthorName(String name) {
+        return bookByAuthorRepository.findByAuthorName(name); 
+    }
+
+    
+        
 
 
     

@@ -24,7 +24,7 @@ public class BookByAuthor {
     private String author_lastname;
 
     public long getBook_id() {
-        return book_id;
+        return this.book_id;
     }
 
     public void setBook_id(long book_id) {
@@ -32,7 +32,7 @@ public class BookByAuthor {
     }
 
     public String getBook_name() {
-        return book_name;
+        return this.book_name;
     }
 
     public void setBook_name(String book_name) {
@@ -40,7 +40,7 @@ public class BookByAuthor {
     }
 
     public String getIsbn13() {
-        return isbn13;
+        return this.isbn13;
     }
 
     public void setIsbn13(String isbn13) {
@@ -48,7 +48,7 @@ public class BookByAuthor {
     }
 
     public String getAuthor_name() {
-        return author_name;
+        return this.author_name;
     }
 
     public void setAuthor_name(String author_name) {
@@ -56,12 +56,12 @@ public class BookByAuthor {
     }
 
     public String getAuthor_lastname() {
-        return author_lastname;
+        return this.author_lastname;
     }
 
-    public void setAuthor_lastname(String author_lastName) {
-        this.author_lastname = author_lastName;
+    public void setAuthor_lastname(String author_lastname) {
+        this.author_lastname = author_lastname;
     }
-    
+
     
 }

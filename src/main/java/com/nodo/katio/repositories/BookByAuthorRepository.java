@@ -46,7 +46,7 @@ public interface BookByAuthorRepository extends JpaRepository<BookByAuthor, Long
         "FROM authors au " +
         "JOIN books bk ON bk.author_Id = au.id " +
         "WHERE " +
-            "au.name LIKE %:jorge%")
+            "au.name LIKE %:name%")
     Iterable<BookByAuthor> findByAuthorName(@Param("name") String name);
 
 

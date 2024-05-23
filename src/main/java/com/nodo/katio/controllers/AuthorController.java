@@ -7,15 +7,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nodo.katio.services.AuthorService;
+import com.nodo.katio.services.UserService;
 
 import java.util.Optional;
 
 import com.nodo.katio.models.Author;
+import com.nodo.katio.models.User;
 import com.nodo.katio.repositories.AuthorRepository;
 
 @RestController
@@ -30,6 +33,15 @@ public class AuthorController {
     public ResponseEntity<Iterable<Author>> getAllAuthors(){
         Iterable<Author> Authors = new AuthorService(authorRepository).getAllAuthors();
         return ResponseEntity.ok(Authors);
+    }
+
+    @PutMapping("/add")
+    public ResponseEntity<Author> addUser(@RequestBody Author author) {
+        Author createdAuthor = new AuthorService(authorRepository).addAuthor(author);
+        
+        return createdAuthor.getId() == 0 ? 
+                ResponseEntity.badRequest().body(createdAuthor) :
+                ResponseEntity.ok(createdAuthor);
     }
 
     @GetMapping("/getById")

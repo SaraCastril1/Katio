@@ -43,3 +43,29 @@ CREATE TABLE Books
         ON DELETE CASCADE
         ON UPDATE RESTRICT
 );
+
+
+CREATE TABLE books_authors
+{
+    book_id INT UNSIGNED NOT NULL,
+    author_id INT UNSIGNED NOT NULL,
+    CONSTRAINT `fk_books_id`
+        FOREIGN KEY (book_id) REFERENCES BOOKS (id)
+        ON DELETE CASCADE
+        ON UPDATE RESTRICT
+    CONSTRAINT `fk_authors_id`
+        FOREIGN KEY (author_id) REFERENCES AUTHORS (id)
+        ON DELETE CASCADE
+        ON UPDATE RESTRICT
+
+}
+
+ALTER TABLE BOOKS DROP FOREIGN KEY IF EXISTS fk_book_author;
+ALTER TABLE BOOKS DROP COLUMN IF EXISTS author_Id;
+
+
+-- TO DO: 
+    -- 1. Agregar insert into
+    -- 2. Join AS A VIEW
+    -- 3. Modelo
+    -- 4. Repositorio

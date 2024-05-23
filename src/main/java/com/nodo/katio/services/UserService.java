@@ -26,6 +26,7 @@ public class UserService implements BaseUserService{
     public Iterable<User> getAllUsers() {
         return userRepository.findAll();
     }
+    
     @Override
     public User addUser(User user) {                                                                
         try{
@@ -76,6 +77,10 @@ public class UserService implements BaseUserService{
         return hexString.toString();
     }
     
+
+    public User getLoggedUser(String email, String passhash) throws NoSuchAlgorithmException {
+        return userRepository.findByEmail(email);
+    }
     
     
 }

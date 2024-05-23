@@ -3,6 +3,7 @@ import org.springframework.stereotype.Service;
 
 import com.nodo.katio.interfaces.BaseAuthorService;
 import com.nodo.katio.models.Author;
+import com.nodo.katio.models.User;
 import com.nodo.katio.repositories.AuthorRepository;
 
 @Service
@@ -19,6 +20,18 @@ public class AuthorService implements BaseAuthorService {
     public Iterable<Author> getAllAuthors() {
         return authorRepository.findAll();
     }
+
+    @Override
+    public Author addAuthor(Author author) {                                                                
+        try{  
+            authorRepository.saveAndFlush(author); 
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }    
+        return author;
+    }
+
 
 
     @Override

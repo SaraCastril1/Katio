@@ -7,8 +7,11 @@ import org.springframework.stereotype.Repository;
 
 import com.nodo.katio.models.Author;
 
+
 @Repository
 public interface AuthorRepository extends CrudRepository<Author, Long> {
+    Author saveAndFlush(Author author);
+
     @Query(nativeQuery = true, 
         value = "SELECT * FROM AUTHORS WHERE id = :id")
     Author findById(@Param("id") long id);

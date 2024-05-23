@@ -10,6 +10,8 @@ import com.nodo.katio.models.Book;
 
 @Repository
 public interface BookRepository extends CrudRepository<Book, Long> {
+    Book saveAndFlush(Book book);
+
     @Query(nativeQuery = true, 
         value = "SELECT * FROM BOOKS WHERE id = :id")
     Book findById(@Param("id") long id);
@@ -29,7 +31,7 @@ public interface BookRepository extends CrudRepository<Book, Long> {
     // BOOKS BY AUTHORS ---------------------------------------------------------------------
 
     @Query(nativeQuery = true, 
-        value = "SELECT * FROM BOOKS WHERE author_id LIKE %:author_id%")
+        value = "SELECT * FROM BOOKS WHERE author_id LIKE :author_id")
     Iterable<Book> findByAuthorId(@Param("author_id") long author_id);
 
 

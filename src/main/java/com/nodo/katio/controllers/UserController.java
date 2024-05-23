@@ -2,14 +2,17 @@
 
 package com.nodo.katio.controllers;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,6 +60,31 @@ public class UserController {
         var response = new UserService(userRepository).getUsersByName(user.getName());
         return new ResponseEntity<Iterable<User>>(response, HttpStatus.OK);
     }
+
+
+    // @PostMapping("/login")
+    // public ResponseEntity<?> login(@RequestBody User user) throws NoSuchAlgorithmException{
+    //     var loggedUser = new UserService(userRepository).getLoggedUser(user.getEmail(), user.getPasshash());
+    //     if(loggedUser != null){
+    //         return new ResponseEntity<>(loggedUser, HttpStatus.OK);
+    //     }else{
+    //         return new ResponseEntity<String>("¡Email o contraseña incorrecta!", HttpStatus.BAD_REQUEST);
+    //     }
+        
+    // }
+
+    @GetMapping("/login")
+    public ResponseEntity<User> login(@RequestBody User user) throws NoSuchAlgorithmException {
+        Optional<User> response = Optional.ofNullable(new UserService(userRepository).getLoggedUser(user.getEmail(), user.getPasshash()));
+        
+        if (response.isPresent()) {
+            return new ResponseEntity<>(response.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    
 
    
 } 

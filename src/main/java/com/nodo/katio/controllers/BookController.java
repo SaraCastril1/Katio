@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,7 @@ import com.nodo.katio.models.Book;
 import com.nodo.katio.repositories.BookRepository;
 import com.nodo.katio.repositories.BookByAuthorRepository;
 import com.nodo.katio.services.BookService;
+
 
 
 
@@ -36,6 +38,15 @@ public class BookController {
     public ResponseEntity<Iterable<Book>> getAllBooks() {
         Iterable<Book> books = new BookService(bookRepository, bookByAuthorRepository).getAllBooks();
         return ResponseEntity.ok(books);
+    }
+
+    @PutMapping("/add")
+    public ResponseEntity<Book> addBook(@RequestBody Book book) {
+        Book createdBook = new BookService(bookRepository, bookByAuthorRepository).addBook(book);
+        
+        return createdBook.getId() == 0 ? 
+                ResponseEntity.badRequest().body(createdBook) :
+                ResponseEntity.ok(createdBook);
     }
 
    @GetMapping("/getById")
@@ -77,6 +88,12 @@ public class BookController {
     @GetMapping("/getByAuthorName/{name}")
     public ResponseEntity<Iterable<BookByAuthor>> getBooksByAuthorName(@PathVariable("name") String name) {
         var response = new BookService(bookRepository, bookByAuthorRepository).getBooksByAuthorName(name);
+        return new ResponseEntity<Iterable<BookByAuthor>>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/getByAuthorLastname/{lastname}")
+    public ResponseEntity<Iterable<BookByAuthor>> getBooksByAuthorLastname(@PathVariable("lastname") String lastname) {
+        var response = new BookService(bookRepository, bookByAuthorRepository).getBooksByAuthorName(lastname);
         return new ResponseEntity<Iterable<BookByAuthor>>(response, HttpStatus.OK);
     }
 

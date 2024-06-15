@@ -2,6 +2,8 @@
 
 package com.nodo.katio.repositories;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -23,6 +25,15 @@ public interface UserRepository extends CrudRepository<User, Integer>{
 
     @Query(nativeQuery = true, 
         value = "SELECT * FROM USERS WHERE email LIKE :email")
-    User findByEmail(@Param("email") String email);
+    Optional<User> findByEmail(@Param("email") String email);
+
+    @Query(nativeQuery = true,
+        value = "SELECT * FROM USERS WHERE email = :email and passhash = :passhash")
+    Optional<User> findLoggedUser (@Param("email") String email, @Param("passhash") String passhash);
+
+
+    @Query(nativeQuery = true, 
+        value = "SELECT * FROM USERS WHERE email LIKE %:email%")
+    Optional<User> findByUsername(@Param("email") String email);
 
 }

@@ -14,7 +14,7 @@ CREATE TABLE users
     phone NVARCHAR(20) NOT NULL,
     identification NVARCHAR(20) NOT NULL,
     passhash NVARCHAR(255) NOT NULL,
-    INDEX email_idx(Email)
+    INDEX email_idx(email)
 );
 
 CREATE TABLE Authors
@@ -36,8 +36,8 @@ CREATE TABLE Books
     published DATE NOT NULL,
     edition NVARCHAR(255) NOT NULL,
     genre NVARCHAR(255) NOT NULL,
-    dewey_Index INT UNSIGNED NOT NULL,
-    author_Id INT UNSIGNED NOT NULL,
+    Dewey_Index INT UNSIGNED NOT NULL,
+    author_id INT UNSIGNED NOT NULL,
     CONSTRAINT `fk_book_author`
         FOREIGN KEY (author_Id) REFERENCES Authors (Id)
         ON DELETE CASCADE
@@ -45,23 +45,65 @@ CREATE TABLE Books
 );
 
 
-CREATE TABLE books_authors
-{
-    book_id INT UNSIGNED NOT NULL,
+CREATE TABLE Audiobooks
+(
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name NVARCHAR(255) NOT NULL,
+    isbn10 NVARCHAR(255) NOT NULL,
+    isbn13 NVARCHAR(255) NOT NULL,
+    published Date NOT NULL,
+    edition NVARCHAR(255) NOT NULL,
+    genre NVARCHAR(255) NOT NULL,
+    abridged BIT NOT NULL,
+    lengthInSeconds INT UNSIGNED NOT NULL,
+    path NVARCHAR(255) NOT NULL,
     author_id INT UNSIGNED NOT NULL,
-    CONSTRAINT `fk_books_id`
-        FOREIGN KEY (book_id) REFERENCES BOOKS (id)
+    CONSTRAINT `fk_audiobooks_author`
+        FOREIGN KEY (author_id) REFERENCES Authors (id)
         ON DELETE CASCADE
         ON UPDATE RESTRICT
-    CONSTRAINT `fk_authors_id`
-        FOREIGN KEY (author_id) REFERENCES AUTHORS (id)
-        ON DELETE CASCADE
-        ON UPDATE RESTRICT
+);
 
-}
+CREATE TABLE Narrator
+(
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name NVARCHAR(255) NOT NULL,    
+    lastName NVARCHAR(255) NOT NULL,
+    genre NVARCHAR(255) NOT NULL,
+    languages NVARCHAR(255) NOT NULL    
+);
 
-ALTER TABLE BOOKS DROP FOREIGN KEY IF EXISTS fk_book_author;
-ALTER TABLE BOOKS DROP COLUMN IF EXISTS author_Id;
+CREATE TABLE Books_Authors
+(
+  book_id INT UNSIGNED NOT NULL,
+  author_id INT UNSIGNED NOT NULL,
+  CONSTRAINT `fk_books_id`
+  	FOREIGN KEY (book_id) REFERENCES Books (id)
+  	ON DELETE CASCADE
+  	ON UPDATE RESTRICT,
+  CONSTRAINT `fk_authors_id`
+  	FOREIGN KEY (author_id) REFERENCES Authors (id)
+  	ON DELETE CASCADE
+  	ON UPDATE RESTRICT  
+);
+
+ALTER TABLE Books DROP FOREIGN KEY IF EXISTS fk_book_author;
+ALTER TABLE Books DROP COLUMN IF EXISTS Author_id;
+
+
+CREATE VIEW Book_author_view AS
+SELECT 
+	bk.id as Book_id, 
+    bk.name as book_name, 
+    au.id as Author_id, 
+  CONCAT(au.name, " ", au.lastname) as Author_name 
+FROM Books_authors ba
+JOIN Books bk ON bk.id = ba.book_id
+JOIN Authors au ON au.id = ba.author_id;
+
+
+ALTER TABLE IF EXISTS Users 
+	ADD COLUMN IF NOT EXISTS role_id nvarchar(10) NOT NULL;
 
 
 -- TO DO: 

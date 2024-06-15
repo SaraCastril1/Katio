@@ -1,6 +1,5 @@
 package com.nodo.katio.models;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -8,16 +7,19 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+// import org.springframework.security.core.GrantedAuthority;
+// import org.springframework.security.core.userdetails.UserDetails;
 
+// import java.util.Collection;
 
 
 @Entity
 @Table(name="users")
-public class User {
+public class User{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private long id;
 
     private String name;
     private String lastname;
@@ -25,6 +27,9 @@ public class User {
     private String phone;
     private String identification;    
     private String passhash;
+    private String roleId;
+
+    
 
     public void stringValidator(String expression) {
         if (!expression.matches("[a-zA-ZÁÉÍÓÚáéíóúÜüÑñ ]+")) {
@@ -38,8 +43,11 @@ public class User {
         }
     }
 
-    public Integer getId() {
+    public long getId() {
         return this.id;
+    }
+    public void setId(long id) {
+        this.id = id;
     }
     public String getName() {
         return this.name;
@@ -89,5 +97,14 @@ public class User {
     public void setPasshash(String passhash) {
         this.passhash = passhash;
     }
+
+    public String getRoleId() {
+        return this.roleId;
+    }
+
+    public void setRoleId(String roleId) {
+        this.roleId = roleId;
+    }
+    
     
 }

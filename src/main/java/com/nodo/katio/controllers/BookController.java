@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,13 +41,15 @@ public class BookController {
         return ResponseEntity.ok(books);
     }
 
+
     @PutMapping("/add")
-    public ResponseEntity<Book> addBook(@RequestBody Book book) {
-        Book createdBook = new BookService(bookRepository, bookByAuthorRepository).addBook(book);
-        
-        return createdBook.getId() == 0 ? 
-                ResponseEntity.badRequest().body(createdBook) :
-                ResponseEntity.ok(createdBook);
+    public ResponseEntity<String> addBook(@RequestBody Book book) {
+        try{
+            new BookService(bookRepository, bookByAuthorRepository).addBook(book);
+            return new ResponseEntity<String>("El libro ha sido creado correctamente", HttpStatus.OK);
+        }catch(Exception ex){
+            return new ResponseEntity<String>("El libro no pudo ser creado.\n Revise sus valores de entrada.", HttpStatus.BAD_REQUEST);
+        }
     }
 
    @GetMapping("/getById")
@@ -78,11 +81,11 @@ public class BookController {
         return new ResponseEntity<Iterable<Book>>(response, HttpStatus.OK);
     }
 
-    @GetMapping("/getByAuthorId")
-    public ResponseEntity<Iterable<Book>> getBookByAuthorId(@RequestBody Book book) {
-        var response = new BookService(bookRepository, bookByAuthorRepository).getBooksByAuthorId(book.getAuthorId());
-        return new ResponseEntity<Iterable<Book>>(response, HttpStatus.OK);
-    }
+    // @GetMapping("/getByAuthorId")
+    // public ResponseEntity<Iterable<Book>> getBookByAuthorId(@RequestBody Book book) {
+    //     var response = new BookService(bookRepository, bookByAuthorRepository).getBooksByAuthorId(book.getAuthorId());
+    //     return new ResponseEntity<Iterable<Book>>(HttpStatus.OK);
+    // }
 
     // BOOKS BY AUTHORS ----------------------------------------------------------------------
     @GetMapping("/getByAuthorName/{name}")

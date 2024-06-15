@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nodo.katio.services.AuthorService;
-import com.nodo.katio.services.UserService;
+import com.nodo.katio.services.BookService;
 
 import java.util.Optional;
 
 import com.nodo.katio.models.Author;
-import com.nodo.katio.models.User;
+import com.nodo.katio.models.Book;
 import com.nodo.katio.repositories.AuthorRepository;
 
 @RestController
@@ -36,12 +36,13 @@ public class AuthorController {
     }
 
     @PutMapping("/add")
-    public ResponseEntity<Author> addUser(@RequestBody Author author) {
-        Author createdAuthor = new AuthorService(authorRepository).addAuthor(author);
-        
-        return createdAuthor.getId() == 0 ? 
-                ResponseEntity.badRequest().body(createdAuthor) :
-                ResponseEntity.ok(createdAuthor);
+    public ResponseEntity<String> addAuthor(@RequestBody Author author) {
+        try{
+            new AuthorService(authorRepository).addAuthor(author);
+            return new ResponseEntity<String>("El autor ha sido creado correctamente", HttpStatus.OK);
+        }catch(Exception ex){
+            return new ResponseEntity<String>("El autor no pudo ser creado.\n Revise sus valores de entrada.", HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping("/getById")

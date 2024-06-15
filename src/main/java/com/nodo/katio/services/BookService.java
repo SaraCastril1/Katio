@@ -1,13 +1,11 @@
 package com.nodo.katio.services;
 
-import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
 import com.nodo.katio.dto.BookByAuthor;
 import com.nodo.katio.interfaces.BaseBookService;
 import com.nodo.katio.models.Book;
-import com.nodo.katio.models.User;
 import com.nodo.katio.repositories.BookByAuthorRepository;
 import com.nodo.katio.repositories.BookRepository;
 
@@ -33,17 +31,10 @@ public class BookService implements BaseBookService {
         return bookRepository.findById(id);
     }
 
+
     @Override
-    public Book addBook(Book book) {                                                                
-        try{
-            if(book.getAuthorId() > 43)
-            {
-                bookRepository.saveAndFlush(book);
-            }     
-        }
-        catch(Exception ex){
-            ex.printStackTrace();
-        }    
+    public Book addBook(Book book) throws Exception {
+        bookRepository.saveAndFlush(book);
         return book;
     }
 

@@ -23,7 +23,6 @@ public class Book {
     private String edition;
     private String genre;
     private String deweyIndex;
-    private long authorId;
 
     public long getId() {
         return id;
@@ -73,13 +72,5 @@ public class Book {
     public void setDeweyIndex(String deweyIndex) {
         this.deweyIndex = deweyIndex;
     }
-    public long getAuthorId() {
-        return authorId;
-    }
-    public void setAuthorId(long authorId) {
-        this.authorId = authorId;
-    }
-
-
     
 }

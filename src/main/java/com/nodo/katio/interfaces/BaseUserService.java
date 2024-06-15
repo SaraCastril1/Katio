@@ -1,7 +1,5 @@
 package com.nodo.katio.interfaces;
 
-
-import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 
 import com.nodo.katio.models.User;

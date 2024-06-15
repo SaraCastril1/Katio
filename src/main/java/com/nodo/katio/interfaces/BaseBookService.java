@@ -5,7 +5,7 @@ import com.nodo.katio.models.Book;
 
 public interface BaseBookService {
     Iterable<Book> getAllBooks();
-    Book addBook(Book book);
+    Book addBook(Book book) throws Exception;
     Book getBookById(long id);
     Iterable<Book> getBooksByName(String name);
     Iterable<Book> getBooksByGenre(String genre);
